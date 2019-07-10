@@ -1,0 +1,37 @@
+body {
+  margin: 0 auto;
+  font-family: sans-serif;
+} 
+
+h1 {
+  font-family: "Comic Sans MS";
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#eaten {
+  font-family: "Comic Sans MS";
+}
+
+.game-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.lives-margin {
+  margin-top: 20px;
+}
+
+#board {
+  border: 1px solid black;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 500px;
+  border-radius: 15px;
+}
+
