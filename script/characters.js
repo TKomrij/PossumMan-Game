@@ -206,7 +206,7 @@ function collisionObjects(obj1, obj2) {
     && obj1.x + obj1.width > obj2.x
     && obj1.y < obj2.y + obj2.height
     && obj1.y + obj1.height > obj2.y) {
-       //debugger
+       debugger
        policeCtrl = true
       //collision = true;
       if(policeCtrl == true) {
@@ -218,9 +218,11 @@ function collisionObjects(obj1, obj2) {
             if(livesLeft == 0) {
               alert("Oh no! You got caught!")
             };
+            policeCtrl = false
+            debugger
               return
         }
-        policeCtrl = false
+        
     };
 
   // collision possum - food
