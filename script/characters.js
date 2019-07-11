@@ -9,6 +9,7 @@ let livesLeft = 3;
 let collision = false;
 let removeFood;
 let badFood = []
+let policeCtrl = false
 
 
 canvas.width = window.innerHeight;
@@ -206,8 +207,9 @@ function collisionObjects(obj1, obj2) {
     && obj1.y < obj2.y + obj2.height
     && obj1.y + obj1.height > obj2.y) {
        //debugger
+       policeCtrl = true
       //collision = true;
-      // if(collision == true) {
+      if(policeCtrl == true) {
         livesLeft --
         // update scoreboard
         console.log("Oh no! You got caught!");
@@ -217,6 +219,8 @@ function collisionObjects(obj1, obj2) {
               alert("Oh no! You got caught!")
             };
               return
+        }
+        policeCtrl = false
     };
 
   // collision possum - food
