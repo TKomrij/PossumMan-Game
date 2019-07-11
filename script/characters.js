@@ -206,22 +206,22 @@ function collisionObjects(obj1, obj2) {
     && obj1.x + obj1.width > obj2.x
     && obj1.y < obj2.y + obj2.height
     && obj1.y + obj1.height > obj2.y) {
-       debugger
-       policeCtrl = true
+      debugger
+      policeCtrl = true
       //collision = true;
       if(policeCtrl == true) {
         livesLeft --
         // update scoreboard
         console.log("Oh no! You got caught!");
-            livesLeft --;
-            document.getElementById("lives").innerText = livesLeft;
-            if(livesLeft == 0) {
-              alert("Oh no! You got caught!")
-            };
-            policeCtrl = false
-            debugger
-              return
-        }
+        //livesLeft --;
+        document.getElementById("lives").innerText = livesLeft;
+        if(livesLeft == 0) {
+          alert("Oh no! You got caught!")
+        };
+        policeCtrl = false
+        debugger
+        return
+      }
         
     };
 
