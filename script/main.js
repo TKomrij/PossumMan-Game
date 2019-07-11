@@ -16,6 +16,5 @@ function draw() {
 };
 
 draw()
- // boundaries
  
  

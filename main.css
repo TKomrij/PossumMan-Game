@@ -35,3 +35,14 @@ h1 {
   border-radius: 15px;
 }
 
+.button1 {
+ margin-left: 780px;
+ color: white;
+ background-color: orange;
+}
+
+.button2 {
+  margin-left: 765px;
+  color: white;
+  background-color: green;
+}
