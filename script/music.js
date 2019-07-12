@@ -36,3 +36,6 @@ $(".button2").click(function() {
   soundGame.play();
   
   })
+
+
+

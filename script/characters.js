@@ -5,7 +5,7 @@ ctx.font = '18px serif';
 
 let keys = {};
 let score = 0;
-let livesLeft = 3;
+let livesLeft = 150;
 let collision = false;
 let removeFood;
 let badFood = []

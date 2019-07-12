@@ -36,13 +36,24 @@ h1 {
 }
 
 .button1 {
- margin-left: 780px;
+margin-left: 780px;
  color: white;
  background-color: orange;
+ line-height: 20px;
 }
 
 .button2 {
   margin-left: 765px;
   color: white;
   background-color: green;
+  margin-top: 10px;
+  line-height: 20px;
+}
+
+.button3 {
+ margin-left: 805px;
+ margin-top: 10px;
+ line-height: 20px;
+ color: white;
+ background-color: tan;
 }
