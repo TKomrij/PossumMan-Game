@@ -216,6 +216,7 @@ function collisionObjects(obj1, obj2) {
         document.getElementById("lives").innerText = livesLeft;
         if(livesLeft == 0) {
           alert("Oh no! You got caught!")
+          location.reload(true)
         };
         policeCtrl = false
         return
@@ -242,6 +243,7 @@ function collisionObjects(obj1, obj2) {
             document.getElementById("eaten").innerText = score
             if(score == 50) {
               alert("You're a rootin' and tootin' possum!")
+              location.reload(true)
             }
             return
         
