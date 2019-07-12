@@ -206,7 +206,6 @@ function collisionObjects(obj1, obj2) {
     && obj1.x + obj1.width > obj2.x
     && obj1.y < obj2.y + obj2.height
     && obj1.y + obj1.height > obj2.y) {
-      debugger
       policeCtrl = true
       //collision = true;
       if(policeCtrl == true) {
@@ -217,10 +216,8 @@ function collisionObjects(obj1, obj2) {
         document.getElementById("lives").innerText = livesLeft;
         if(livesLeft == 0) {
           alert("Oh no! You got caught!")
-          location.reload(true)
         };
         policeCtrl = false
-        debugger
         return
       }
         
@@ -237,7 +234,6 @@ function collisionObjects(obj1, obj2) {
       && badFood.indexOf(obj2[i]) == -1) {
         removeFood = obj2[i].id
         badFood.push(obj2[i])
-        //debugger
         collision = true;
         // if(collision == true) {
           // update scoreboard
@@ -246,7 +242,6 @@ function collisionObjects(obj1, obj2) {
             document.getElementById("eaten").innerText = score
             if(score == 50) {
               alert("You're a rootin' and tootin' possum!")
-              location.reload(true)
             }
             return
         
@@ -316,7 +311,6 @@ function draw () {
     setTimeout(()=> {
       let removedFood = foods.filter(food => (food.id == removeFood));
       removeFood = undefined
-      debugger
       badFood = [];
       if(removedFood[0]) {
         filterFoods.push(removedFood[0]);
@@ -332,7 +326,6 @@ function draw () {
   //     drawFood(filterFoods[i].image, filterFoods[i]);
   //   }
   //   collision = false;
-  //   //debugger
   // } else {
   //   for(i = 0; i < foods.length; i++) {
   //     drawFood(foods[i].image, foods[i]);
@@ -341,7 +334,6 @@ function draw () {
   // if(badFood.length > 0) {
   //   setTimeout(function() {
   //     console.log("ksjdfhskjdfhs")
-  //     //debugger
   //     for(i = 0; i < badFood.length; i++) {
   //       drawFood(badFood[i].image, badFood[i]);
   //     }
