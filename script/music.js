@@ -25,7 +25,7 @@ class Sound {
 
 };
 
-$("body div button").click(function() {
+$(".button1").click(function() {
 let soundGame = new Sound("fcd.mp3", true);
 soundGame.play();
 

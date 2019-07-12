@@ -1,39 +1,16 @@
+// canvas-------------------------------------------------------------------------------
+
 const canvas = document.getElementById("board");
 const ctx    = canvas.getContext("2d");
 ctx.fillStyle = 'white';
 ctx.font = '18px serif';
 
-let keys = {};
-let score = 0;
-let livesLeft = 150;
-let collision = false;
-let removeFood;
-let badFood = []
-let policeCtrl = false
-
-
 canvas.width = window.innerHeight;
 canvas.height = window.innerHeight
 
-// Images
-const possumImage = new Image();
-possumImage.src = "https://media.giphy.com/media/xT0BKuZRyjpUQadEpq/giphy.gif";
+// global-------------------------------------------------------------------------------
 
-// const foodImage1 = new Image();
-// foodImage1.src = "https://media.giphy.com/media/dYwyN5xXBP5hSP77bo/giphy.gif";
-
-// const foodImage2 = new Image()
-// foodImage2.src = "https://media.giphy.com/media/1qfKSo9vsdZh70D4ZT/giphy.gif";
-
-// const foodImage3 = new Image();
-// foodImage3.src = "https://media.giphy.com/media/cLZYVIRbpI6TsemLFw/giphy.gif";
-
-// const foodImage4 = new Image();
-// foodImage4.src = "https://media.giphy.com/media/xUOwFRUH1foa66zvLq/giphy.gif";
-
-const policeImage = new Image();
-policeImage.src = "https://media.giphy.com/media/l0Iy8RHyESNYq2FcA/giphy.gif";
-
+let keys = {};
 
 function createObject (object) {
   this.id = object.id;
@@ -46,7 +23,18 @@ function createObject (object) {
   this.image = object.image
 }
 
-// possum
+// Images-------------------------------------------------------------------------------
+
+const possumImage = new Image();
+possumImage.src = "https://media.giphy.com/media/xT0BKuZRyjpUQadEpq/giphy.gif";
+
+
+const policeImage = new Image();
+policeImage.src = "https://media.giphy.com/media/l0Iy8RHyESNYq2FcA/giphy.gif";
+
+
+// possum-------------------------------------------------------------------------------
+
 let possum = new createObject ({
   x: 25,
   y: 25,
@@ -55,7 +43,8 @@ let possum = new createObject ({
   speed: 12,
 })
 
-// foods
+// foods--------------------------------------------------------------------------------
+
 let foods = []
 
 let food1 = new createObject ({
@@ -109,7 +98,8 @@ food4.image.src = "https://media.giphy.com/media/xUOwFRUH1foa66zvLq/giphy.gif"
 foods.push(food1, food2, food3, food4)
 var filterFoods = foods
 
-// police
+// police-------------------------------------------------------------------------------
+
 let police = new createObject({
   x: canvas.width - 100,
   y: canvas.height - 150,
@@ -118,28 +108,8 @@ let police = new createObject({
   speed: 5,
 })
 
-///////
-////////////////////
-// Done:
-// - make different trash objects appear on canvas 
-// - move trash objects in random positions
-// - add police 
-// - collision possum - food
-// - collision possum - police
-// - collision food - canvas
-// - foods stay and bounce within canvas
-// - foods move at different velocity
+// Movement Possum----------------------------------------------------------------------
 
-// To Do Tatiane:
-// - dissappear of trash if the collision is true
-// - updatescoreboard/lives
-// - police follow possum
-// - police stay within canvas
-// extra: start/reset game
-// extra: collision food - food
-// extra extra: evasion police - food
-
-// Movement
 window.addEventListener("keydown", function (e) {
   keys[e.keyCode] = true;
   e.preventDefault();
@@ -180,8 +150,8 @@ function movement(possum) {
   }
 }
 
+//movement police-----------------------------------------------------------------------
 
-//movement police
 function chase(police) {
   if(possum.x < police.x){
     police.x -= police.speed;
@@ -197,18 +167,24 @@ function chase(police) {
   }
 }
 
-// Collisions
-// - Collision objects
+// Collision objects--------------------------------------------------------------------
+
+let score = 0;
+let livesLeft = 25;
+let collision = false;
+let removeFood;
+let badFood = []
+let policeCtrl = []
+
 function collisionObjects(obj1, obj2) {
-  
   // collision possum - police
   if(obj1.x < obj2.x + obj2.width
     && obj1.x + obj1.width > obj2.x
     && obj1.y < obj2.y + obj2.height
     && obj1.y + obj1.height > obj2.y) {
-      policeCtrl = true
       //collision = true;
-      if(policeCtrl == true) {
+      if(policeCtrl.indexOf(obj2) == -1) {
+        policeCtrl.push(obj2)
         livesLeft --
         // update scoreboard
         console.log("Oh no! You got caught!");
@@ -218,13 +194,15 @@ function collisionObjects(obj1, obj2) {
           alert("Oh no! You got caught!")
           location.reload(true)
         };
-        policeCtrl = false
-        return
+        // return
       }
-        
+        setTimeout(()=> {
+          policeCtrl = []
+        }, 2000)
     };
 
-  // collision possum - food
+  // collision possum - food------------------------------------------------------------
+
   if(obj2 == foods) {
     for(i=0; i < obj2.length; i++ ) {
   
@@ -254,7 +232,8 @@ function collisionObjects(obj1, obj2) {
 };
 
 
-// - Collision Foods - Wall
+// - Collision Foods - Wall-------------------------------------------------------------
+
 function collisionFoods (foods){
   foods.forEach(el => {
 
@@ -284,7 +263,8 @@ function slowMoveFoods (food1, food2, food3, food4) {
   food4.y += food4.gravity;
 }
 
-// Draw Images
+// Draw Images--------------------------------------------------------------------------
+
 function drawPossum(possum) {
   ctx.drawImage(possumImage, possum.x, possum.y, possum.width, possum.height);
 }
@@ -294,10 +274,6 @@ function drawFood(foodImage, food) {
 function drawPolice(police) {
   ctx.drawImage(policeImage, police.x, police.y, police.width, police.height);
 }
-// filterfoods
-// badfood
-// removefood
-// foods 
 
 function draw () {
   ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -321,27 +297,6 @@ function draw () {
   }
   collision = false;
 
-
-  // if(collision == true) {
-  //   filterFoods = filterFoods.filter(food => !(food.id == removeFood))
-  //   for(i = 0; i < filterFoods.length; i++) {
-  //     drawFood(filterFoods[i].image, filterFoods[i]);
-  //   }
-  //   collision = false;
-  // } else {
-  //   for(i = 0; i < foods.length; i++) {
-  //     drawFood(foods[i].image, foods[i]);
-  //   }
-  // }
-  // if(badFood.length > 0) {
-  //   setTimeout(function() {
-  //     console.log("ksjdfhskjdfhs")
-  //     for(i = 0; i < badFood.length; i++) {
-  //       drawFood(badFood[i].image, badFood[i]);
-  //     }
-      
-  //   }, 1000)
-  // }
   drawPolice(police);
 }
 
@@ -362,8 +317,21 @@ updateCanvas();
 
 
 
-
-
+////////////////////
+// Done:
+// - make different trash objects appear on canvas 
+// - move trash objects in random positions
+// - add police 
+// - collision possum - food
+// - collision possum - police
+// - collision food - canvas
+// - foods stay and bounce within canvas
+// - foods move at different velocity
+// - dissappear of trash if the collision is true
+// - updatescoreboard/lives
+// - police follow possum
+// - police stay within canvas
+// extra: start/reset game
 
 
 
